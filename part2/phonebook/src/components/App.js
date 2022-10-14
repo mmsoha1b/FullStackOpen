@@ -1,15 +1,19 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Persons from './Persons'
 import AddPerson from './AddPerson';
 import Search from './Search';
+import axios from 'axios'
 
 const App = () => {
-  const [persons, setPersons] = useState([
-    { name: 'Arto Hellas',
-      number:'000-111022',
-      id:1,
-    }
-  ]) 
+  const [persons, setPersons] = useState([]) 
+  const fetchData = ()=>{
+    axios
+    .get('http://localhost:3001/persons')
+    .then((response)=>{
+      const data = response.data
+      setPersons(data)
+    })}
+  useEffect(fetchData,[])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber]= useState('')
   const [searchTerm, setSearchTerm]=useState('')  

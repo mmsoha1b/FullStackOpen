@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react'
-import Persons from './Persons'
-import AddPerson from './AddPerson';
-import Search from './Search';
-import axios from 'axios'
+import Persons from './components/Persons'
+import AddPerson from './components/AddPerson';
+import Search from './components/Search';
+import personService from './services/persons'  
+import noteService from './services/persons';
 
 const App = () => {
   const [persons, setPersons] = useState([]) 
   const fetchData = ()=>{
-    axios
-    .get('http://localhost:3001/persons')
-    .then((response)=>{
-      const data = response.data
-      setPersons(data)
-    })}
+    personService.getAll()
+                  .then(data=>{
+                  setPersons(data)
+                  })
+                }
   useEffect(fetchData,[])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber]= useState('')
@@ -28,11 +28,11 @@ const App = () => {
       <h2>add a new</h2>
       <AddPerson
         setNewName={setNewName} newName={newName} newNumber={newNumber} setNewNumber={setNewNumber}
-        persons={persons} setPersons={setPersons}/>
+        persons={persons} setPersons={setPersons} noteService={noteService}/>
       
       <h2>Numbers</h2>
       <div>
-        <Persons people={showPeople}/>
+        <Persons people={showPeople} noteService={noteService} setPersons={setPersons} persons={persons}/>
       </div>
     </div>
   )

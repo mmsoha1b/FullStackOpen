@@ -1,4 +1,5 @@
-const AddPerson=({setNewName,setNewNumber,newName,newNumber,persons,setPersons})=>{
+
+const AddPerson=({setNewName,setNewNumber,newName,newNumber,persons,setPersons,noteService})=>{
     const handleNameChange=(event)=>{
         setNewName(event.target.value)
       }
@@ -8,27 +9,38 @@ const AddPerson=({setNewName,setNewNumber,newName,newNumber,persons,setPersons})
     const checkIfAlreadyPresent=()=>{
         const names = persons.map(person=>person.name)
         if (names.includes(newName)){
-            alert(`${newName} is already present`)
             return false
         }
         return true
     }
-        const addNewName=(event)=>{
+    const addNewName=(event)=>{
         event.preventDefault();
         if (!checkIfAlreadyPresent()){
-            return
+            if(window.confirm(`${newName} is already present, replace the old number?`)){
+                const oldPerson = persons.find(person=>person.name===newName)
+                const newPerson = {...oldPerson,number:newNumber}
+                noteService.replaceNumber(oldPerson ,newPerson).then((response)=>{
+                    console.log(response.data)
+                    setPersons(persons.map((obj)=>obj.id!==oldPerson.id?obj:newPerson))
+                })               
+            }
         }
-        const newPerson={
-            name: newName,
-            number: newNumber,
-            id: persons.length+1
-        }
-        setPersons(persons.concat(newPerson));
-        setNewName('')
-        setNewNumber('')
-    }
+        else{
+            const newPerson={
+                name: newName,
+                number: newNumber,
+            }
+            noteService.create(newPerson)
+                .then(newPerson=>{
+                    setPersons(persons.concat(newPerson));
+                    setNewName('')
+                    setNewNumber('')
+                })
+                .catch(error=>{
+                    console.log(error)
+                })}}
     return(
-    <form onSubmit={addNewName}>
+    <form onSubmit = {addNewName}>
         <div>
           name: <input 
                  value={newName} 

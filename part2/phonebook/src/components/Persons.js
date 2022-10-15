@@ -1,8 +1,21 @@
-const Persons =({people})=>{
+const Person = ({person,destroy})=>{
+  return(
+    <div>
+    <span>{person.name} {person.number}</span>
+    <button onClick={destroy}>delete</button>
+    </div>
+  )
+}
+const Persons =({people,noteService,setPersons,persons})=>{
   return(
     people.map((person)=>{
     return(
-        <p key={person.id}>{person.name} {person.number}</p>
+      <Person key={person.id} person={person} destroy={()=>{
+        if(window.confirm(`Delete ${person.name} ?`)){
+        noteService.destroy(person)
+        const newPersons=persons.filter(obj=>obj.id!==person.id)
+        setPersons(newPersons)
+      }}}/>
     )
   })
   )

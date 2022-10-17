@@ -15,5 +15,5 @@ const replaceNumber=(person,newPerson)=>{
     const request = axios.put(`${baseUrl}/${person.id}`,newPerson)
     return request
 }
-const noteService = {create, getAll, destroy,replaceNumber}
-export default noteService
+const personService = {create, getAll, destroy,replaceNumber}
+export default personService

@@ -1,5 +1,5 @@
 
-const AddPerson=({setNewName,setNewNumber,newName,newNumber,persons,setPersons,noteService})=>{
+const AddPerson=({setNewName,setNewNumber,newName,newNumber,persons,setPersons,personService,setNotification,err,setErr})=>{
     const handleNameChange=(event)=>{
         setNewName(event.target.value)
       }
@@ -19,9 +19,22 @@ const AddPerson=({setNewName,setNewNumber,newName,newNumber,persons,setPersons,n
             if(window.confirm(`${newName} is already present, replace the old number?`)){
                 const oldPerson = persons.find(person=>person.name===newName)
                 const newPerson = {...oldPerson,number:newNumber}
-                noteService.replaceNumber(oldPerson ,newPerson).then((response)=>{
-                    console.log(response.data)
+                personService.replaceNumber(oldPerson ,newPerson).then((response)=>{
                     setPersons(persons.map((obj)=>obj.id!==oldPerson.id?obj:newPerson))
+                    setNewName('')
+                    setNewNumber('')
+                    setNotification('Updated number')
+                    setTimeout(()=>{setNotification(null)},5000)
+                })
+                .catch((error)=>{
+                    setNotification(`Information of ${newName} has already been removed from the server`)
+                    setNewName('')
+                    setNewNumber('')
+                    setErr(true)
+                    setTimeout(()=>{
+                        setNotification(null)
+                        setErr(!err)
+                    },5000)
                 })               
             }
         }
@@ -30,11 +43,13 @@ const AddPerson=({setNewName,setNewNumber,newName,newNumber,persons,setPersons,n
                 name: newName,
                 number: newNumber,
             }
-            noteService.create(newPerson)
+            personService.create(newPerson)
                 .then(newPerson=>{
                     setPersons(persons.concat(newPerson));
                     setNewName('')
                     setNewNumber('')
+                    setNotification('Added person')
+                    setTimeout(()=>{setNotification(null)},5000)
                 })
                 .catch(error=>{
                     console.log(error)

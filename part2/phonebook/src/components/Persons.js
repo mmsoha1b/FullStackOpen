@@ -6,13 +6,13 @@ const Person = ({person,destroy})=>{
     </div>
   )
 }
-const Persons =({people,noteService,setPersons,persons})=>{
+const Persons =({people,personService,setPersons,persons})=>{
   return(
     people.map((person)=>{
     return(
       <Person key={person.id} person={person} destroy={()=>{
         if(window.confirm(`Delete ${person.name} ?`)){
-        noteService.destroy(person)
+        personService.destroy(person)
         const newPersons=persons.filter(obj=>obj.id!==person.id)
         setPersons(newPersons)
       }}}/>

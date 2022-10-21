@@ -6,3 +6,10 @@ Content-Type: application/json
     "number":"11-11-1222"
 }
 ###
+POST https://phonebook-app-11191091910.fly.dev/api/persons
+Content-Type: application/json
+
+{
+    "name":"name",
+    "number":"11-11-1222"
+}

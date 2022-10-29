@@ -17,6 +17,7 @@ const AddPerson=({setNewName,setNewNumber,newName,newNumber,persons,setPersons,p
         event.preventDefault();
         if (!checkIfAlreadyPresent()){
             if(window.confirm(`${newName} is already present, replace the old number?`)){
+                console.log('here');
                 const oldPerson = persons.find(person=>person.name===newName)
                 const newPerson = {...oldPerson,number:newNumber}
                 personService.replaceNumber(oldPerson ,newPerson).then((response)=>{
@@ -53,6 +54,12 @@ const AddPerson=({setNewName,setNewNumber,newName,newNumber,persons,setPersons,p
                 })
                 .catch(error=>{
                     console.log(error)
+                    setErr(true);
+                    setNotification(error.response.data.error)
+                    setTimeout(()=>{
+                        setNotification(null);
+                        setErr(false);
+                    },5000)
                 })}}
     return(
     <form onSubmit = {addNewName}>

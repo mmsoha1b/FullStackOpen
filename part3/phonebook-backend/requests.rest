@@ -6,10 +6,26 @@ Content-Type: application/json
     "number":"11-11-1222"
 }
 ###
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "name":"na",
+    "number":"11-11-1222"
+}
+###
 POST https://phonebook-app-11191091910.fly.dev/api/persons
 Content-Type: application/json
 
 {
-    "name":"name",
+    "name":"n",
     "number":"11-11-1222"
+}
+###
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "name":"b0ss",
+    "number":"09-1234556"
 }

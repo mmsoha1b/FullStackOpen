@@ -2,3 +2,5 @@
 /part3/phonebook-backend/node_modules
 /part3/phonebook-backend/.env
 /node_modules
+/part4/blog-app/node_modules
+/part4/blog-app/.env

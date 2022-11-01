@@ -7,3 +7,22 @@ Content-Type: application/json
     "url": "https://www.google.com",
     "likes": "3"
 }
+
+###
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+    "title":"Fourth Blog",
+    "author": "opl",
+    "url": "https://www.google.com",
+    "likes": "9"
+}
+
+###
+PUT http://localhost:3003/api/blogs/635fa11293d136a98a692b0d
+Content-Type: application/json
+
+{
+    "likes": "19"
+}

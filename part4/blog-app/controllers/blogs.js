@@ -48,7 +48,6 @@ blogsRouter.delete('/:id',tokenExtractor,userExtractor,async(request,response)=>
 });
 
 blogsRouter.put('/:id',async(request,response)=>{
-
   const id = mongoose.Types.ObjectId(request.params.id);
   const body = request.body;
   const blog = await Blog.findOne({_id:id});

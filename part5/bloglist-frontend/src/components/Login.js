@@ -42,6 +42,7 @@ const Login = ({ username,setUsername,password,setPassword,setUser,setNotificati
         <input
           type="text"
           name="username"
+          id="username-input"
           value={username}
           onChange={usernameHandler}
         />
@@ -51,11 +52,12 @@ const Login = ({ username,setUsername,password,setPassword,setUser,setNotificati
         <input
           type="password"
           name="password"
+          id ="password-input"
           value={password}
           onChange={passwordHandler}
         />
         <br/>
-        <button type ="submit">login</button>
+        <button type ="submit" id="login-button">login</button>
       </form>
     </>
   );

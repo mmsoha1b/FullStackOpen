@@ -23,7 +23,6 @@ const NewBlog=({ setBlogs,blogs,setNotification,setError,user,postNew }) => {
       setUrl("");
       savedBlog.user=user;
       setBlogs(blogs.concat(savedBlog));
-      console.log("Go fool");
       setNotification(` a new blog ${savedBlog.title} by ${savedBlog.author} added`);
       setTimeout(() => {
         setNotification("");
@@ -49,6 +48,7 @@ const NewBlog=({ setBlogs,blogs,setNotification,setError,user,postNew }) => {
           type='string'
           name='title'
           value={title}
+          id="input-title"
           className="input-title"
           onChange={handleTitle}
         />
@@ -58,6 +58,7 @@ const NewBlog=({ setBlogs,blogs,setNotification,setError,user,postNew }) => {
           type='string'
           name='author'
           className="input-author"
+          id="input-author"
           value={author}
           onChange={handleAuthor}
         />
@@ -67,11 +68,12 @@ const NewBlog=({ setBlogs,blogs,setNotification,setError,user,postNew }) => {
           type='string'
           name='url'
           className="input-url"
+          id="input-url"
           value={url}
           onChange={handleUrl}
         />
         <br/>
-        <button>create</button>
+        <button id="create-blog-button">create</button>
       </form>
     </>
   );

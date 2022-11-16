@@ -38,8 +38,8 @@ const Blog = ({ blog,user,blogs,setBlogs,onLike }) => {
         <div>
           {blog.url}
         </div>
-        <div>
-        likes {likes} <button className="like-button" onClick={likeHandler}>like</button>
+        <div id="likes">
+        likes {likes} <button className="like-button" id="like-button" onClick={likeHandler}>like</button>
         </div>
         <div>
           {blog.author}
